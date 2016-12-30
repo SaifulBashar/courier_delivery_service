@@ -2,14 +2,20 @@
  * Created by saiful on 11/17/16.
  */
 $(function () {
+
+
     function ajax(data) {
         //username making empty
         //password making empty
         $("[name=uname]").val("");
         $("#p").val("");
         //data come from php script as json
-        if (data.ok == "confirm") {
-            alert("success");
+        if (data.ok == "login") {
+
+        //    alert("success");
+            if(data.ok=="login" && data.type=="primary"){
+                location.replace("customer_data.html");
+            }
             //username making empty
             //password making empty
             $("[name=uname]").val('');
@@ -17,7 +23,7 @@ $(function () {
             filled_password_css();
             filled_username_css();
         }
-        else {
+        else if(data.ok == "cancel"){
             alert("fail");
         }
     }
