@@ -27,7 +27,7 @@ $(function () {
         var phone = $("#phone").val();
         $.get( "add_customer_data.php",{cnid:nid,cname:name,cphone:phone}, function( data ) {
             if (data.ok == "ok"){
-                location.replace("shipment.html");
+                alert("customer add");
             }
             
 
@@ -53,7 +53,7 @@ $(function () {
             cphone:phone,
             weight:weight
         },function (data) {
-            alert();
+            alert(data.ok);
         },"json");
     })
 });

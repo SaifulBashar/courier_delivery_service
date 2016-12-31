@@ -1,11 +1,11 @@
 <?php
-$name = $_GET["name"];
-$pass = $_GET["pass"];
+
 $string = "cancel";
 
 
+
 try {
-    //database connection 
+    //database connection
     $db = new PDO('mysql:host=localhost;dbname=user', 'root', 'root');
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     //database connection
@@ -13,25 +13,20 @@ try {
 
 
     /////////////////////////////sql////////////////////////////
-    $sql = "select * from user.user_validation where username =:name";
+    $sql = "select * from user.courier WHERE courier_id = :id";
+
     $data = $db->prepare($sql);
-    $data->execute(array(":name" => $name));
+    $data->execute(array(":id" => $_GET["id"]));
     //////////////////////////fetching data/////////////////////////
-    $usr = $data->fetch();
 
-    if ($name == $usr["username"] && $pass == $usr["password"]) {
-        
-        $string = "login";
-
-    } else {
-
-        $string = "cancel";
-
-    }
-
-
+        $info = $data->fetch();
     
-    echo json_encode(array("ok" => $string,"type"=> $usr["user_privilage"]));
+
+
+
+
+    echo json_encode(array("cid" => $info["courier_id"],  "weight" => $info["weight"], "wirehouse1"=>$info["wirehouse1"] ,"wirehouse2"=>$info["wirehouse2"] ));
+
 
 
 } catch (PDOException $e) {

@@ -1,11 +1,11 @@
 <?php
-$name = $_GET["name"];
-$pass = $_GET["pass"];
+
 $string = "cancel";
 
 
+
 try {
-    //database connection 
+    //database connection
     $db = new PDO('mysql:host=localhost;dbname=user', 'root', 'root');
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     //database connection
@@ -13,25 +13,23 @@ try {
 
 
     /////////////////////////////sql////////////////////////////
-    $sql = "select * from user.user_validation where username =:name";
-    $data = $db->prepare($sql);
-    $data->execute(array(":name" => $name));
-    //////////////////////////fetching data/////////////////////////
-    $usr = $data->fetch();
-
-    if ($name == $usr["username"] && $pass == $usr["password"]) {
-        
-        $string = "login";
-
-    } else {
-
-        $string = "cancel";
-
+    if($_GET["w_name"] == "wirehouse1"){
+        $sql = "UPDATE user.courier SET wirehouse1 = :w_true WHERE courier_id = :id;";
+    }
+    if($_GET["w_name"] == "wirehouse2"){
+        $sql = "UPDATE user.courier SET wirehouse2 = :w_true WHERE courier_id = :id;";
     }
 
+    $data = $db->prepare($sql);
+    $data->execute(array(":id" => $_GET["id"]  , ":w_true" => $_GET["w_true"]));
+    //////////////////////////fetching data/////////////////////////
 
-    
-    echo json_encode(array("ok" => $string,"type"=> $usr["user_privilage"]));
+
+
+
+
+
+    echo json_encode(array("ok" => "update"));
 
 
 } catch (PDOException $e) {

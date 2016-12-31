@@ -10,12 +10,21 @@ $(function () {
         $("[name=uname]").val("");
         $("#p").val("");
         //data come from php script as json
+
+
         if (data.ok == "login") {
 
-        //    alert("success");
-            if(data.ok=="login" && data.type=="primary"){
+
+            if( data.type=="primary"){
+
                 location.replace("customer_data.html");
             }
+            if(data.type == "wire_house_employee"){
+
+                location.replace("wirehouse_confirmation.html");
+            }
+
+
             //username making empty
             //password making empty
             $("[name=uname]").val('');

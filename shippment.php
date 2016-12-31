@@ -53,7 +53,7 @@ try {
     $data->execute(array($id[0],$weight));
 
 
-    echo json_encode(array("ok" => $string));
+    echo json_encode(array("ok" => $id[0]));
 
 
 } catch (PDOException $e) {
